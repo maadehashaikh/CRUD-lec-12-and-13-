@@ -12,10 +12,18 @@ app.get('/',(req,res) => {
   res.render("index");
 })
 
+
 app.get('/edit/:userid',async (req,res) => {
   let user = await userModel.findOne({_id: req.params.userid});
   res.render("edit",{user});
 })
+
+app.post('/update/:userid',async (req,res) => {
+  let {image , name , email} = req.body;
+  let user = await userModel.findOneAndDelete({_id: req.params.userid},{email , name , image} ,{new:true} );
+  res.redirect("/read");
+})
+
 
 app.get('/read',async (req,res) => {
   let users = await userModel.find();
