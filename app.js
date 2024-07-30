@@ -20,9 +20,9 @@ app.get('/edit/:userid',async (req,res) => {
 
 app.post('/update/:userid',async (req,res) => {
   let {image , name , email} = req.body;
-  let user = await userModel.findOneAndDelete({_id: req.params.userid},{email , name , image} ,{new:true} );
+  let user = await userModel.findOneAndDelete({_id: req.params.userid},{image , name ,  email} ,{new:true} );
   res.redirect("/read");
-})
+}) 
 
 
 app.get('/read',async (req,res) => {
