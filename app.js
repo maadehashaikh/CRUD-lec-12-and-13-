@@ -12,6 +12,11 @@ app.get('/',(req,res) => {
   res.render("index");
 })
 
+app.get('/edit/:userid',async (req,res) => {
+  let user = await userModel.findOne({_id: req.params.userid});
+  res.render("edit",{user});
+})
+
 app.get('/read',async (req,res) => {
   let users = await userModel.find();
   res.render("read",{users});
